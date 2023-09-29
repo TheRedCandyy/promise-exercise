@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise exercise</title>
+    <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
+    <link rel="icon" href="https://www.wundermanthompson.com/favicon.svg?v=2022" type="image/svg+xml">
+    <style>
+        body { 
+            margin: 0;
+            font-family: 'Nunito', sans-serif;
+            color: #333333;
+            background-color: #fafafa;
+        }
+        h2 { font-size: 18px; }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        section {
+            margin: 0 20px;
+            
+        }
+        section .form {
+            background-color: #eee;
+            padding: 20px 30px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <section>
+
+            <h1>Promise exercise</h1>
+
+            <p>In this exercise you will be working with <a href="https://postcodes.io/">postcodes.io</a>.</p>
+
+            <p>There are two parts that will validate your understanding of promises, one with .then and one with await.</p>
+
+            <p>For both parts you will be creating an asyncronous function that either returns the lat/long data or the error details.</p>
+
+            <ul>
+                <li><code>{"status":200,"lat":51.658794,"long":-0.396545}</code></li>
+                <li><code>{"status":400,"error":"Invalid postcode"}</code></li>
+            </ul>
+
+            <h2>Part 1 - .then</h2>
+
+            <p>Update the 'then-script.js' file to write the new function using .then.</p>
+
+            <ul>
+                <li><code>async</code> function to return lat/long data or the error</li>
+                <li><code>fetch</code> to call postcodes.io</li>
+                <li><code>encodeURI</code> to encode the postcode</li>
+                <li><code>.then</code> to extract the JSON data</li>
+                <li><code>.then</code> to return the lat/long on a 200</li>
+                <li><code>throw</code> an error if the status is not 200</li>
+                <li><code>.error</code> to catch the throw and return the error JSON</li>
+            </ul>
+
+            <h2>Part 2 - await</h2>
+
+            <p>Update the 'await-script.js' file to write the new function using await and updater the script included in this file.</p>
+
+            <ul>
+                <li><code>async</code> function to return lat/long data or the error</li>
+                <li><code>try catch</code> wrapping potential failures</li>
+                <li><code>fetch</code> to call postcodes.io</li>
+                <li><code>encodeURI</code> to encode the postcode</li>
+                <li><code>throw</code> an error if the status is not 200</li>
+                <li><code>catch</code> to catch the throw and return the error JSON</li>
+            </ul>
+
+        </section>
+
+        <section>
+
+            <div class="form">
+
+                <h2>Part 1 - .then form</h2>
+
+                <form name="then-form">
+                    <label for="postcode">Postcode</label>
+                    <input type="text" name="postcode" value="WD17 1JJ" required />
+                    <input type="submit" value="Lookup" />
+                </form>
+
+                <p>Output the JSON data below</p>
+
+                <fieldset>
+                    <legend>Result</legend>
+                    <code id="response1"></code>
+                </fieldset>
+
+            </div>
+
+            <div class="form">
+
+                <h2>Part 2 - await form</h2>
+
+                <form name="await-form">
+                    <label for="postcode">Postcode</label>
+                    <input type="text" name="postcode" value="WD17 1JJ" required />
+                    <input type="submit" value="Lookup" />
+                </form>
+
+                <p>Output the JSON data below</p>
+
+                <fieldset>
+                    <legend>Result</legend>
+                    <code id="response2"></code>
+                </fieldset>
+
+            </div>
+
+        </section>
+
+    </div>
+
+    <script src="/then-script.js"></script>
+    <script src="/await-script.js"></script>
+    <script type="text/javascript">
+        const attachToDOM = () => {
+            const thenForm = document.forms['then-form'];
+            const awaitForm = document.forms['await-form'];
+            if (thenForm.addEventListener) {
+                thenForm.addEventListener("submit", function(evt) { thenSubmitHandler(evt, this); }, true);
+                awaitForm.addEventListener("submit", function(evt) { awaitSubmitHandler(evt, this); }, true);
+            } else {
+                thenForm.attachEvent('onsubmit', function(evt){ thenSubmitHandler(evt, this); });
+                awaitForm.attachEvent('onsubmit', function(evt){ awaitSubmitHandler(evt, this); });
+            }
+        }
+        attachToDOM();
+    </script>
+
+</body>
+</html>
